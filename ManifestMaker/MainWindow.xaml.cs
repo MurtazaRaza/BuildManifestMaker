@@ -60,7 +60,8 @@ namespace ManifestMaker
                     List<string> escapeCharacters = new List<string>()
                     {
                         "-",
-                        "_"
+                        "_",
+                        "-"
                     };
                     string pakFileChunkId = GetUntilOrEmpty(substringedIntermediate, escapeCharacters);
 
