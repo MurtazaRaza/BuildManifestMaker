@@ -5,25 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManifestMaker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Manifest Maker" Height="400" Width="525">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="20,25,0,0" TextWrapping="Wrap" Text="Generate Manifest at directory" VerticalAlignment="Top"/>
         <StackPanel>
             <TextBlock HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Pak File Folder Path:" VerticalAlignment="Top"/>
             <TextBox Name="PathTextBox" AcceptsReturn="True" HorizontalAlignment="Left" Margin="20,5,0,0" Width="300"></TextBox>
             
-            <TextBlock HorizontalAlignment="Left" Margin="20,20,0,0" TextWrapping="Wrap" Text="Deployment Name:" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Deployment Name:" VerticalAlignment="Top"/>
             <TextBox Name="DeploymentNameTextBox" AcceptsReturn="True" HorizontalAlignment="Left" Margin="20,5,0,0" Width="300"></TextBox>
             
             <TextBlock HorizontalAlignment="Left" Margin="20,20,0,0" TextWrapping="Wrap" Text="Platform Name:" VerticalAlignment="Top"/>
             <ComboBox Margin="20,5,0,13" Name="PlatformNameComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="20">  
-                <ComboBoxItem Content="VariantA"></ComboBoxItem>  
                 <ComboBoxItem Content="Android"></ComboBoxItem>  
                 <ComboBoxItem Content="Windows"></ComboBoxItem>  
                 <ComboBoxItem Content="IOS"></ComboBoxItem>  
             </ComboBox>  
+            <TextBlock HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Platform Quality" VerticalAlignment="Top"/>
+            <ComboBox Margin="20,5,0,13" Name="QualityComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="20">  
+                <ComboBoxItem Content="High"></ComboBoxItem>  
+                <ComboBoxItem Content="Medium"></ComboBoxItem>  
+                <ComboBoxItem Content="Low"></ComboBoxItem>  
+            </ComboBox>  
         </StackPanel>
         
-        <Button Content="Generate" HorizontalAlignment="Left" Margin="20,270,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button Content="Generate" HorizontalAlignment="Left" Margin="20,330,0,0" VerticalAlignment="Top" Width="75" Click="OnGenerateManifestClicked"/>
     </Grid>
 </Window>

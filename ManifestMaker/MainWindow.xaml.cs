@@ -16,9 +16,10 @@ namespace ManifestMaker
             InitializeComponent();
         }
         
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void OnGenerateManifestClicked(object sender, RoutedEventArgs e)
         {
             string platformName = PlatformNameComboBox.Text;
+            string qualityType = QualityComboBox.Text;
             string deploymentName = DeploymentNameTextBox.Text;
             string path = PathTextBox.Text;
 
@@ -37,7 +38,7 @@ namespace ManifestMaker
             
             List<FileInfo> ListOfFiles = Files.Where(file => !file.Name.Contains("pakchunk0")).ToList();
 
-            string textFilePath = path + $"/BuildManifest-{platformName}.txt";
+            string textFilePath = path + $"/BuildManifest-{platformName}-{qualityType}.txt";
             // Check if file already exists. If yes, delete it.     
             if (File.Exists(textFilePath))
             {
@@ -65,7 +66,7 @@ namespace ManifestMaker
                     };
                     string pakFileChunkId = GetUntilOrEmpty(substringedIntermediate, escapeCharacters);
 
-                    string pakFilePathRelative = $"/{platformName}/{file.Name}";
+                    string pakFilePathRelative = $"/{platformName}/{qualityType}/{file.Name}";
                     sw.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}", pakFileName, pakFileSize, pakFileVersion, pakFileChunkId, pakFilePathRelative);
                 }
             }
