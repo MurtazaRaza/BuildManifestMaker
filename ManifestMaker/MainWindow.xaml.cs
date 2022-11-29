@@ -38,7 +38,12 @@ namespace ManifestMaker
             
             List<FileInfo> ListOfFiles = Files.Where(file => !file.Name.Contains("pakchunk0")).ToList();
 
-            string textFilePath = path + $"/BuildManifest-{platformName}-{qualityType}.txt";
+            string textFilePath = "";
+            if(!qualityType.Equals("Default"))
+                textFilePath = path + $"/BuildManifest-{platformName}-{qualityType}.txt";
+            else
+                textFilePath = path + $"/BuildManifest-{platformName}.txt";
+            
             // Check if file already exists. If yes, delete it.     
             if (File.Exists(textFilePath))
             {
@@ -65,8 +70,13 @@ namespace ManifestMaker
                         "-"
                     };
                     string pakFileChunkId = GetUntilOrEmpty(substringedIntermediate, escapeCharacters);
-
-                    string pakFilePathRelative = $"/{platformName}/{qualityType}/{file.Name}";
+                    
+                    string pakFilePathRelative = "";
+                    if(!qualityType.Equals("Default"))
+                        pakFilePathRelative = $"/{platformName}/{qualityType}/{file.Name}";
+                    else
+                        pakFilePathRelative = $"/{platformName}/{file.Name}";
+                    
                     sw.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}", pakFileName, pakFileSize, pakFileVersion, pakFileChunkId, pakFilePathRelative);
                 }
             }

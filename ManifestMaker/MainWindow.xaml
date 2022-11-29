@@ -22,7 +22,8 @@
                 <ComboBoxItem Content="IOS"></ComboBoxItem>  
             </ComboBox>  
             <TextBlock HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Platform Quality" VerticalAlignment="Top"/>
-            <ComboBox Margin="20,5,0,13" Name="QualityComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="20">  
+            <ComboBox Margin="20,5,0,13" Name="QualityComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="20">
+                <ComboBoxItem Content="Default"></ComboBoxItem>  
                 <ComboBoxItem Content="High"></ComboBoxItem>  
                 <ComboBoxItem Content="Medium"></ComboBoxItem>  
                 <ComboBoxItem Content="Low"></ComboBoxItem>  
