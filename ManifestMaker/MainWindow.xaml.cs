@@ -3,6 +3,7 @@ using System.Windows;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ManifestMaker
 {
@@ -40,7 +41,8 @@ namespace ManifestMaker
 
             string textFilePath = "";
             if(!qualityType.Equals("Default"))
-                textFilePath = path + $"/BuildManifest-{platformName}-{qualityType}.txt";
+                textFilePath = path + $"/BuildManifest-{platformName}.txt";
+                // textFilePath = path + $"/BuildManifest-{platformName}-{qualityType}.txt";
             else
                 textFilePath = path + $"/BuildManifest-{platformName}.txt";
             
@@ -50,6 +52,8 @@ namespace ManifestMaker
                 File.Delete(textFilePath);
             }
 
+            string pakFileVersion = "ver03";
+            string toBeSearched = "pakchunk";
             // Create a new file     
             using (StreamWriter sw = File.CreateText(textFilePath))
             {
@@ -59,9 +63,7 @@ namespace ManifestMaker
                 {
                     string pakFileName = file.Name;
                     string pakFileSize = file.Length.ToString();
-                    string pakFileVersion = "ver001";
-
-                    string toBeSearched = "pakchunk";
+                    
                     string substringedIntermediate = file.Name.Substring(file.Name.IndexOf(toBeSearched) + toBeSearched.Length);
                     List<string> escapeCharacters = new List<string>()
                     {
@@ -70,6 +72,7 @@ namespace ManifestMaker
                         "-"
                     };
                     string pakFileChunkId = GetUntilOrEmpty(substringedIntermediate, escapeCharacters);
+                    pakFileChunkId = GetChunkIdWithoutUnnecessaryText(pakFileChunkId);
                     
                     string pakFilePathRelative = "";
                     if(!qualityType.Equals("Default"))
@@ -82,7 +85,7 @@ namespace ManifestMaker
             }
         }
 
-        public string GetUntilOrEmpty(string text, List<string> escapeCharacters)
+        private string GetUntilOrEmpty(string text, List<string> escapeCharacters)
         {
             if (string.IsNullOrWhiteSpace(text)) return string.Empty;
             
@@ -108,6 +111,12 @@ namespace ManifestMaker
             }
 
             return charLocation > -1 ? text.Substring(0, charLocation) : string.Empty;
+        }
+
+        private string GetChunkIdWithoutUnnecessaryText(String text)
+        {
+            string numberOnly = Regex.Replace(text, "[^0-9.]", "");
+            return numberOnly;
         }
     }
 }
